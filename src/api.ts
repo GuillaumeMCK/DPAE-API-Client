@@ -12,7 +12,7 @@ import {
   UrlDepot,
 } from "@/utils/conts";
 
-export class ApiDpae {
+export class DPAEApiClient {
   /// environment (testing : 1, production : 120)
   public TestIndicator: number;
   /// information for authentication

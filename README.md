@@ -16,11 +16,11 @@ npm install
 ## Usage
 
 ```typescript
-import { ApiDpae } from 'path-to-api';
+import { DPAEApiClient } from 'path-to-api';
 import * as models from 'path-to-models';
 
 // Create DPAE object
-const dpae = new ApiDpae({
+const dpae = new DPAEApiClient({
   TestIndicator: 1, // Set to 1 for testing or 120 for production
   Identifiants: {
     SIRET: 'your-siret-number',
@@ -66,7 +66,7 @@ try {
 
 ## API Reference
 
-### `ApiDpae` Class
+### `DPAEApiClient` Class
 
 #### Methods:
 
@@ -124,7 +124,7 @@ try {
 #### Constructor:
 
 - **`constructor(attributes: models.Dpae, prod: boolean = false)`**
-    - Initializes the `ApiDpae` object with the provided attributes and environment.
+    - Initializes the `DPAEApiClient` object with the provided attributes and environment.
 
 ### Models
 

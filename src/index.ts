@@ -1,7 +1,7 @@
-import { ApiDpae } from "@/api";
+import { DPAEApiClient } from "@/api";
 import * as m from "@/models";
 
 module.exports = {
-  ApiDpae,
+  DPAEApiClient,
   m,
 };
