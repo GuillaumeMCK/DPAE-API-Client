@@ -31,4 +31,4 @@ package-lock.json
 npm-shrinkwrap.json
 
 # Ignore build output of bundlers
-/dpae/
+/lib/
