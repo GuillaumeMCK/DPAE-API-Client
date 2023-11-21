@@ -26,7 +26,7 @@ const dpae = new DPAEApiClient({
     SIRET: 'your-siret-number',
     Nom: 'Your Company Name',
     Prenom: 'Your Company FirstName',
-    MotDePasse: 'your-password',
+    MotDePasse: '***"',
     Service: '25', // Set to '25' for declarant or '98' for concentrateur
   },
   Employer: {
@@ -38,7 +38,6 @@ const dpae = new DPAEApiClient({
   Contract: {
     // ... Contract details
   },
-  // ... Additional attributes
 });
 
 // Authenticate
