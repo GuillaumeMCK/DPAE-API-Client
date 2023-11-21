@@ -10,14 +10,13 @@ This is a TypeScript library for interacting with the URSSAF (Union de Recouvrem
 ## Installation
 
 ```bash
-npm install
+npm install dpae-api-client
 ```
 
 ## Usage
 
 ```typescript
-import { DPAEApiClient } from 'path-to-api';
-import * as models from 'path-to-models';
+import { DPAEApiClient } from 'dpae-api-client';
 
 // Create DPAE object
 const dpae = new DPAEApiClient({
