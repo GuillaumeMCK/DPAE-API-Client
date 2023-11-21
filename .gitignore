@@ -1,0 +1,34 @@
+# Ignore built files and directories
+/dist/
+/out/
+
+# Ignore TypeScript cache
+*.tsbuildinfo
+
+# Ignore node_modules
+node_modules/
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+
+# Ignore build and configuration files
+*.bak
+*.log
+*.swp
+*.swo
+*.swn
+
+# Ignore environment variables file
+.env
+
+# Ignore test coverage directory
+coverage/
+
+# Ignore dependency lock files
+yarn.lock
+package-lock.json
+npm-shrinkwrap.json
+
+# Ignore build output of bundlers
+/dpae/

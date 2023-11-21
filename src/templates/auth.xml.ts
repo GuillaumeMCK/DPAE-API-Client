@@ -1,0 +1,9 @@
+export const authXml = `
+<identifiants>
+    <siret>{{SIRET}}</siret>
+    <nom>{{Nom}}</nom>
+    <prenom>{{Prenom}}</prenom>
+    <motdepasse>{{MotDePasse}}</motdepasse>
+    <service>{{Service}}</service>
+</identifiants>
+`.trim();

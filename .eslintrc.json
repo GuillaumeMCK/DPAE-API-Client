@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:mocha/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "mocha"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "mocha/no-exclusive-tests": "error",
+    "useTabs": 0
+  }
+}
