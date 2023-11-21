@@ -1,7 +1,2 @@
-import { DPAEApiClient } from "@/api";
-import * as m from "@/models";
-
-module.exports = {
-  DPAEApiClient,
-  m,
-};
+export * from '@/api';
+export * from '@/models';
