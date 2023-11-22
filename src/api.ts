@@ -42,6 +42,16 @@ export class DPAEApiClient {
   }
 
   /**
+   * @name mode
+   * @description set the mode (testing or production)
+   * @param {boolean} prod - true for production, false for testing
+   * @return {void}
+   */
+  public mode(prod: boolean): void {
+    this.TestIndicator = prod ? 120 : 1;
+  }
+
+  /**
    * @name dpae
    * @description return the DPAE object with the current values
    * @return {Promise<boolean>}
@@ -105,6 +115,7 @@ export class DPAEApiClient {
       this.Token = response.data.toString();
 
       if (this.Token.length < 10) {
+        this.resetToken();
         throw new Error(`Erreur jeton: ${this.Token}`);
       }
 
@@ -116,10 +127,10 @@ export class DPAEApiClient {
 
   /**
    * @name resetToken
-   * @description reset the token.
-   * @return {Promise<void>}
+   * @description reset the token to empty
+   * @return {void}
    */
-  public async resetToken(): Promise<void> {
+  public resetToken(): void {
     this.Token = "";
   }
 
@@ -133,7 +144,7 @@ export class DPAEApiClient {
       throw new Error("Empty token");
     }
 
-    this.Employer.HealthService = "01"; // 01 : CPAM,
+    this.Employer.HealthService = "01";
 
     if (this.Employee.BirthDepartment === "00") {
       this.Employee.BirthDepartment = "92";
