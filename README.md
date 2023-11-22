@@ -136,8 +136,9 @@ try {
 - **`Retours`**
 - **`Consultation`**
 
-### Official Documentation
+## Official Documentation
 
+- [Fonctionnement](https://telechargement.dpae-edi.urssaf.fr/5491-API-DPAE-Fonctionnement-2021.pdf)
 - [Guide Implementation](https://www.dpae-edi.urssaf.fr/5492-API-DPAE-Guide-Implementation.pdf)
 - [Q/A](https://www.dpae-edi.urssaf.fr/5493-API-DPAE-FAQ-v1.1.pdf)
 
