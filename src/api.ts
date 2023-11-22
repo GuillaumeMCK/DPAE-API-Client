@@ -28,7 +28,7 @@ export class DPAEApiClient {
   /// return from URSSAF
   public Certificat: string; // the certificat
   public CertifError: string; // the error message if the certificat is not valid
-  private constructor(attributes: m.Dpae, prod: boolean = false) {
+  public constructor(attributes: m.Dpae, prod: boolean = false) {
     this.TestIndicator = prod ? 120 : 1;
     this.Identifiants = attributes.Identifiants;
     this.Employer = attributes.Employer;
