@@ -1,4 +1,4 @@
-import { Identifiants, Dpae } from "@/models";
+import { Dpae, Identifiants } from "@/models";
 import { authXml, dpaeXml } from "@/templates/templates";
 import * as Handlebars from "handlebars";
 import moment from "moment";
@@ -19,6 +19,18 @@ const fmtDate = (date: string): string => {
     "YYYYMM",
     "YYYY",
   ]).format("YYYY-MM-DD");
+};
+
+const fmtString = (str?: string): string => {
+  let cleanedStr = str.replace(
+    /[^a-zA-Z0-9éèêëâàäöôûüîïç°²!#$%&'()*+,-./:;<=>?@ ]/g,
+    ""
+  );
+
+  if (cleanedStr.length > 32) {
+    cleanedStr = cleanedStr.substring(0, 32);
+  }
+  return cleanedStr;
 };
 
 // Compile a Handlebars template with data and format the result
@@ -51,14 +63,27 @@ export const generateDpaeXml = (data: Dpae): string => {
     throw new Error("Service must be 25 or 98");
   }
 
-  if (data.Contract.NatureCode != "CDD" && data.Contract.NatureCode != "CDI") {
-    throw new Error("NatureCode must be CDD or CDI");
+  if (
+    data.Contract.NatureCode != "CDD" &&
+    data.Contract.NatureCode != "CDI" &&
+    data.Contract.NatureCode != "CTT"
+  ) {
+    throw new Error("NatureCode must be CDD, CDI or CTT");
   }
 
   data.Employee.BirthDate = fmtDate(data.Employee.BirthDate);
   data.Contract.StartContractDate = fmtDate(data.Contract.StartContractDate);
   data.Contract.StartContractTime = fmtTime(data.Contract.StartContractTime);
   data.Contract.EndContractDate = fmtDate(data.Contract.EndContractDate);
+
+  data.Employer.Designation = fmtString(data.Employer.Designation);
+  data.Employer.Address = fmtString(data.Employer.Address);
+  data.Employer.Town = fmtString(data.Employer.Town);
+  data.Employer.Postal = fmtString(data.Employer.Postal);
+  data.Employee.Surname = fmtString(data.Employee.Surname);
+  data.Employee.ChristianName = fmtString(data.Employee.ChristianName);
+  data.Employee.BirthTown = fmtString(data.Employee.BirthTown);
+  data.Employee.BirthDepartment = fmtString(data.Employee.BirthDepartment);
 
   return compileAndFormatTemplate(dpaeXml, data);
 };
