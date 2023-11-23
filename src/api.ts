@@ -144,8 +144,6 @@ export class DPAEApiClient {
       throw new Error("Empty token");
     }
 
-    this.Employer.HealthService = "01";
-
     if (this.Employee.BirthDepartment === "00") {
       this.Employee.BirthDepartment = "92";
     }
