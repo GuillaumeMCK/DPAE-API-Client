@@ -25,7 +25,12 @@ const fmtDate = (date: string): string => {
     "YYYY-MM",
     "YYYYMM",
     "YYYY",
+    "DD/MM/YYYY HH:mm",
+    "DD-MM-YYYY HH:mm",
+    "DD/MM/YYYY HH:mm:ss",
+    "DD-MM-YYYY HH:mm:ss",
     "YY-MM-DD HH:mm:ss",
+    "YY-MM-DD HH:mm",
   ]).format("YYYY-MM-DD");
 };
 
