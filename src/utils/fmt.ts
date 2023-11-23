@@ -3,6 +3,10 @@ import { authXml, dpaeXml } from "@/templates/templates";
 import * as Handlebars from "handlebars";
 import moment from "moment";
 
+const employerRgx = /[^a-zA-Z0-9éèêëâàäöôûüîïç°²!#$%&'()*+,-./:;<=>?@ ]/g;
+const employeeRgx = /[^A-Z' .&-]/g;
+const townRgx = /[^A-Z0-9 .'-]/g;
+
 // Format a time to HH:mm:ss
 const fmtTime = (time: string): string => {
   return moment(time, ["HH:mm:ss", "HH:mm", "HHmmss", "HHmm", "HH"]).format(
@@ -25,11 +29,12 @@ const fmtDate = (date: string): string => {
   ]).format("YYYY-MM-DD");
 };
 
-const fmtString = (str?: string): string => {
-  let cleanedStr = str.replace(
-    /[^a-zA-Z0-9éèêëâàäöôûüîïç°²!#$%&'()*+,-./:;<=>?@ ]/g,
-    ""
-  );
+const fmtString = (str: string, regex: RegExp, upperCase?: boolean): string => {
+  if (upperCase) {
+    str = str.toUpperCase();
+  }
+
+  let cleanedStr = str.replace(regex, "");
 
   if (cleanedStr.length > 32) {
     cleanedStr = cleanedStr.substring(0, 32);
@@ -53,7 +58,6 @@ export const generateAuthXml = (data: Identifiants): string => {
   if (data.Service !== "25" && data.Service !== "98") {
     throw new Error("Service must be 25 or 98");
   }
-
   return compileAndFormatTemplate(authXml, data);
 };
 
@@ -80,14 +84,16 @@ export const generateDpaeXml = (data: Dpae): string => {
   data.Contract.StartContractTime = fmtTime(data.Contract.StartContractTime);
   data.Contract.EndContractDate = fmtDate(data.Contract.EndContractDate);
 
-  data.Employer.Designation = fmtString(data.Employer.Designation);
-  data.Employer.Address = fmtString(data.Employer.Address);
-  data.Employer.Town = fmtString(data.Employer.Town);
-  data.Employer.Postal = fmtString(data.Employer.Postal);
-  data.Employee.Surname = fmtString(data.Employee.Surname);
-  data.Employee.ChristianName = fmtString(data.Employee.ChristianName);
-  data.Employee.BirthTown = fmtString(data.Employee.BirthTown);
-  data.Employee.BirthDepartment = fmtString(data.Employee.BirthDepartment);
+  data.Employer.Designation = fmtString(data.Employer.Designation, employerRgx);
+  data.Employer.Address = fmtString(data.Employer.Address, employerRgx);
+
+  data.Employer.Town = fmtString(data.Employer.Town, employerRgx);
+  data.Employer.Postal = fmtString(data.Employer.Postal, employerRgx);
+
+  data.Employee.Surname = fmtString(data.Employee.Surname, employeeRgx, true);
+  data.Employee.ChristianName = fmtString(data.Employee.ChristianName, employeeRgx, true);
+
+  data.Employee.BirthTown = fmtString(data.Employee.BirthTown, townRgx, true);
 
   return compileAndFormatTemplate(dpaeXml, data);
 };
