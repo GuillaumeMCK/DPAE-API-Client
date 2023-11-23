@@ -14,10 +14,14 @@ const fmtTime = (time: string): string => {
 const fmtDate = (date: string): string => {
   return moment(date, [
     "YYYY-MM-DD",
+    "YYYY/MM/DD",
+    "DD-MM-YYYY",
+    "DD/MM/YYYY",
     "YYYYMMDD",
     "YYYY-MM",
     "YYYYMM",
     "YYYY",
+    "YY-MM-DD HH:mm:ss",
   ]).format("YYYY-MM-DD");
 };
 
