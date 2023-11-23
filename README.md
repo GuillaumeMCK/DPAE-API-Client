@@ -18,25 +18,43 @@ npm install dpae-api-client
 ```typescript
 import { DPAEApiClient } from 'dpae-api-client';
 
-// Create DPAE object
+// Create a new DPAEApiClient
 const dpae = new DPAEApiClient({
   TestIndicator: 1, // Set to 1 for testing or 120 for production
   Identifiants: {
     SIRET: 'your-siret-number',
     Nom: 'Your Company Name',
     Prenom: 'Your Company FirstName',
-    MotDePasse: '***"',
+    MotDePasse: '***',
     Service: '25', // Set to '25' for declarant or '98' for concentrateur
   },
   Employer: {
-    // ... Employer details
+    Designation: "...",
+    SIRET: "...",
+    URSSAFCode:"...",
+    HealthService: "...",
+    APE: "...",
+    Phone: "....",
+    Adress: "....",
+    Town: "....",
+    Postal: "...."
   },
-  Employee: {
-    // ... Employee details
+  Employee:{
+    Surname: "...",
+    ChristianName: "...",
+    Sex: 2,
+    NIR:"2...",
+    NIRKey:"..",
+    BirthDate: "2001-11-31",
+    BirthTown: "...",
+    BirthDepartment: "..."
   },
-  Contract: {
-    // ... Contract details
-  },
+  Contract:{
+    NatureCode: "CDD", // CDD, CDI or CTT
+    StartContractDate:"2021-11-01",
+    StartContractTime:"08:00",
+    EndContractDate:"2021-12-31"
+  }
 });
 
 // Authenticate
@@ -136,9 +154,10 @@ try {
 - **`Retours`**
 - **`Consultation`**
 
-## Official Documentation
+## Resources
 
 - [Fonctionnement](https://telechargement.dpae-edi.urssaf.fr/5491-API-DPAE-Fonctionnement-2021.pdf)
-- [Guide Implementation](https://www.dpae-edi.urssaf.fr/5492-API-DPAE-Guide-Implementation.pdf)
+- [Guide](https://www.dpae-edi.urssaf.fr/5492-API-DPAE-Guide-Implementation.pdf)
 - [Q/A](https://www.dpae-edi.urssaf.fr/5493-API-DPAE-FAQ-v1.1.pdf)
+- [Golang implementation](https://github.com/flibustenet/dpae)
 
