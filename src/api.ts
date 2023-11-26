@@ -1,7 +1,7 @@
 import * as m from "./models";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import * as zlib from "zlib";
-import { generateAuthXml, generateDpaeXml } from "@/utils/fmt";
+import { generateAuthXml, generateDpaeXml } from "./utils/fmt";
 import {
   RetryNb,
   RetryTempo,
@@ -10,7 +10,7 @@ import {
   UrlAuth,
   UrlConsultation,
   UrlDepot,
-} from "@/utils/conts";
+} from "./utils/constants";
 
 export class DPAEApiClient {
   /// environment (testing : 1, production : 120)

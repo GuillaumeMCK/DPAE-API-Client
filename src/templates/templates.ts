@@ -1,4 +1,4 @@
-import { authXml } from "@/templates/auth.xml";
-import { dpaeXml } from "@/templates/dpae.xml";
+import { authXml } from "./auth.xml";
+import { dpaeXml } from "./dpae.xml";
 
 export { dpaeXml, authXml };

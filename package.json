@@ -1,10 +1,19 @@
 {
   "name": "dpae-api-client",
   "description": "A client for the DPAE API",
-  "version": "0.0.9",
-  "type": "module",
+  "version": "0.0.19",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "import": "./lib/index.js"
+    },
+    "./lib/api": "./lib/api",
+    "./lib/models": "./lib/models",
+    "./lib/templates": "./lib/templates",
+    "./lib/utils": "./lib/utils"
+  },
   "files": [
     "lib"
   ],

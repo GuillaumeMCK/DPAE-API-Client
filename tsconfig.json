@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": [
       "es5",
       "dom",
@@ -11,11 +11,6 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
     "rootDirs": [
       "./src"
     ],

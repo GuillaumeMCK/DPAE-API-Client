@@ -1,5 +1,5 @@
-import { Dpae, Identifiants } from "@/models";
-import { authXml, dpaeXml } from "@/templates/templates";
+import { Dpae, Identifiants } from "../models";
+import { authXml, dpaeXml } from "../templates/templates";
 import * as Handlebars from "handlebars";
 import moment from "moment";
 
