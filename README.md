@@ -16,7 +16,7 @@ npm install dpae-api-client
 ## Usage
 
 ```typescript
-import { DPAEApiClient } from 'dpae-api-client';
+const { DPAEApiClient } = require("dpae-api-client");
 
 // Create a new DPAEApiClient
 const dpae = new DPAEApiClient({
