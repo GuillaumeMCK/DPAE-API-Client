@@ -144,8 +144,12 @@ export class DPAEApiClient {
       throw new Error("Empty token");
     }
 
-    if (this.Employee.BirthDepartment === "00") {
-      this.Employee.BirthDepartment = "92";
+    // If the birth department is not set or eq "00", set it to 99 (overseas)
+    if (
+      this.Employee.BirthDepartment === "00" ||
+      !this.Employee.BirthDepartment
+    ) {
+      this.Employee.BirthDepartment = "99";
     }
     if (this.Employee.BirthDepartment.length > 2) {
       this.Employee.BirthDepartment = this.Employee.BirthDepartment.substring(
