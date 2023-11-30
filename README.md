@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-The **DPAEClient** is a TypeScript library that serves as an API client for Déclaration Préalable à l'Embauche (DPAE), allowing users to authenticate, send data DPAE, and retrieve responses from the server.
+The **DPAEClient** is a TypeScript library that serves as an API client for Déclaration Préalable à l'Embauche (DPAE), allowing users to authenticate, send the DPAE, and retrieve responses from the server.
 
 ## Table of Contents
 
