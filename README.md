@@ -1,13 +1,19 @@
-# DPAE API Client
+# DPAEClient
 
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
-![WIP](https://img.shields.io/badge/status-WIP-yellow.svg)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Overview
+The **DPAEClient** is a TypeScript library that serves as an API client for Déclaration Préalable à l'Embauche (DPAE), allowing users to authenticate, send data DPAE, and retrieve responses from the server.
 
-This is a TypeScript library for interacting with the URSSAF (Union de Recouvrement des Cotisations de Sécurité Sociale et d'Allocations Familiales), specifically for handling Déclaration Préalable à l'Embauche (DPAE) submissions.
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [License](#license)
 
 ## Installation
+
+To install the DPAEClient library, run the following command:
 
 ```bash
 npm install dpae-api-client
@@ -15,144 +21,104 @@ npm install dpae-api-client
 
 ## Usage
 
-```typescript
-const { DPAEApiClient } = require("dpae-api-client");
+Here's an example of how to use the DPAEClient library:
 
-// Create a new DPAEApiClient
-const dpae = new DPAEApiClient({
-  TestIndicator: 1, // Set to 1 for testing or 120 for production
-  Identifiants: {
-    SIRET: 'your-siret-number',
-    Nom: 'Your Company Name',
-    Prenom: 'Your Company FirstName',
-    MotDePasse: '***',
-    Service: '25', // Set to '25' for declarant or '98' for concentrateur
-  },
-  Employer: {
-    Designation: "...",
-    SIRET: "...",
-    URSSAFCode:"...",
-    HealthService: "...",
-    APE: "...",
-    Phone: "....",
-    Adress: "....",
-    Town: "....",
-    Postal: "...."
-  },
-  Employee:{
-    Surname: "...",
-    ChristianName: "...",
-    Sex: 2,
-    NIR:"2...",
-    NIRKey:"..",
-    BirthDate: "2001-11-31",
-    BirthTown: "...",
-    BirthDepartment: "..."
-  },
-  Contract:{
-    NatureCode: "CDD", // CDD, CDI or CTT
-    StartContractDate:"2021-11-01",
-    StartContractTime:"08:00",
-    EndContractDate:"2021-12-31"
-  }
-});
+```typescript
+const {DPAEClient} = require("dpae-api-client");
+
+// Create DPAE attributes
+const dpaeAttributes = {
+    TestIndicator: 1, // 1 : test 2 : production
+    Identifiants: {
+        SIRET: '...',
+        Nom: '...',
+        Prenom: '...',
+        MotDePasse: '',
+        Service: '25', // '25' : declarant '98' : concentrateur
+    },
+    Employer: {
+        Designation: "...",
+        SIRET: "...",
+        URSSAFCode: "...",
+        HealthService: "...",
+        APE: "...",
+        Phone: "....",
+        Adress: "....",
+        Town: "....",
+        Postal: "...."
+    },
+    Employee: {
+        Surname: "...",
+        ChristianName: "...",
+        Sex: 2,
+        NIR: "2...",
+        NIRKey: "..",
+        BirthDate: "1999-11-31",
+        BirthTown: "...",
+        BirthDepartment: "..."
+    },
+    Contract: {
+        NatureCode: "CDD",
+        StartContractDate: "2021-11-01",
+        StartContractTime: "08:00:00",
+        EndContractDate: "2021-12-31"
+    },
+};
+
+// Create DPAEClient instance
+const client = new DPAEClient(dpaeAttributes);
 
 // Authenticate
 try {
-  await dpae.auth('your-password');
+    await client.auth("your_password");
+    console.log("Authentication successful!");
 } catch (error) {
-  console.error(error.message);
+    console.error(`Authentication failed: ${error.message}`);
 }
 
-// Send DPAE
+// Send data
 try {
-  await dpae.send();
+    await client.send();
+    console.log("Data sent successfully!");
 } catch (error) {
-  console.error(error.message);
+    console.error(`Failed to send data: ${error.message}`);
 }
 
-// Retrieve response and certificate
+// Retrieve response
 try {
-  await dpae.retour();
-  console.log(`Certificate: ${dpae.Certificat}`);
+    await client.retour();
+    console.log("Response retrieved successfully!");
 } catch (error) {
-  console.error(error.message);
+    console.error(`Failed to retrieve response: ${error.message}`);
 }
 ```
 
-## API Reference
+## DPAEClient Class
 
-### `DPAEApiClient` Class
+### Constructor
 
-#### Methods:
+- `new DPAEClient(attributes: DPAE, prod?: boolean)`: Creates a new DPAEClient instance.
 
-- **`dpae(): models.Dpae`**
-    - Returns the current state of the DPAE object.
+  - `attributes`: DPAE attributes.
+  - `prod`: Flag indicating whether it is a production environment (default is `false`).
 
-- **`auth(pwd: string): Promise<boolean>`**
-    - Authenticates the user with the provided password.
-    - Returns a Promise resolving to `true` if authentication is successful.
+### Methods
 
-- **`resetToken(): Promise<void>`**
-    - Resets the authentication token.
+- `auth(pwd: string): Promise<boolean>`: Authenticates the DPAEClient with the provided password.
 
-- **`send(): Promise<boolean>`**
-    - Generates the XML and sends the DPAE to URSSAF.
-    - Returns a Promise resolving to `true` if the submission is successful.
+  - `pwd`: Password for authentication.
+  - Returns a promise that resolves to `true` if authentication is successful, throws an error otherwise.
 
-- **`retour(retry: number = 0): Promise<boolean>`**
-    - Retrieves the response and certificate from URSSAF.
-    - Takes an optional `retry` parameter for the current retry count.
-    - Returns a Promise resolving to `true` if the retrieval is successful.
+- `send(): Promise<boolean>`: Sends the DPAE data to the server.
 
-#### Properties:
+  - Returns a promise that resolves to `true` if the data is sent successfully, throws an error otherwise.
 
-- **`TestIndicator: number`**
-    - Indicates the environment (testing: 1, production: 120).
+- `retour(retry?: number): Promise<boolean>`: Retrieves the response from the server after sending data.
 
-- **`Identifiants: models.Identifiants`**
-    - Contains information for authentication.
+  - `retry`: Number of retries (default is `0`).
+  - Returns a promise that resolves to `true` if the response is received successfully, throws an error otherwise.
 
-- **`Employer: models.Employer`**
-    - Contains information for the employer.
-
-- **`Employee: models.Employee`**
-    - Contains information for the employee.
-
-- **`Contract: models.Contract`**
-    - Contains information for the employment contract.
-
-- **`IdFlux: string`**
-    - The idFlux returned by the send request to fetch the certificate.
-
-- **`Sended: string`**
-    - The XML sent to URSSAF.
-
-- **`Token: string`**
-    - The authentication token.
-
-- **`Certificat: string`**
-    - The certificate returned by URSSAF.
-
-- **`CertifError: string`**
-    - The error message if the certificate is not valid.
-
-#### Constructor:
-
-- **`constructor(attributes: models.Dpae, prod: boolean = false)`**
-    - Initializes the `DPAEApiClient` object with the provided attributes and environment.
-
-### Models
-
-- **`Identifiants`**
-- **`Employer`**
-- **`Employee`**
-- **`Contract`**
-- **`Dpae`**
-- **`Retour`**
-- **`Flux`**
-- **`Retours`**
-- **`Consultation`**
+- `ctx(): DPAE`: Returns the current state of DPAE attributes.
 
 ## Resources
 
@@ -160,4 +126,3 @@ try {
 - [Guide](https://www.dpae-edi.urssaf.fr/5492-API-DPAE-Guide-Implementation.pdf)
 - [Q/A](https://www.dpae-edi.urssaf.fr/5493-API-DPAE-FAQ-v1.1.pdf)
 - [Golang implementation](https://github.com/flibustenet/dpae)
-

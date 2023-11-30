@@ -58,8 +58,6 @@ function compileAndFormatTemplate(
 
 // Generate XML for authentication with provided Identifiants data
 export const generateAuthXml = (data: Identifiants): string => {
-  // Pour un déclarant ou tiers déclarant, il convient de paramétrer le service 25.
-  // Pour un concentrateur, le service 98 doit être paramétré.
   if (data.Service !== "25" && data.Service !== "98") {
     throw new Error("Service must be 25 or 98");
   }

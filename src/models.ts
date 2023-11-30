@@ -50,23 +50,23 @@ export interface Dpae {
 }
 
 export interface Retour {
-  Publication: string;
-  Production: string;
-  Nature: string;
-  Statut: string;
-  ID: string;
-  URL: string;
+  publication: string;
+  production: string;
+  nature: string;
+  statut: string;
+  id: string;
+  url: string;
 }
 
 export interface Flux {
-  ID: string;
-  Retour: Retour[];
+  id: string;
+  retour: Retour[];
 }
 
 export interface Retours {
-  Flux: Flux[];
+  flux: Flux[];
 }
 
 export interface Consultation {
-  Retours: Retours;
+  retours: Retours;
 }
